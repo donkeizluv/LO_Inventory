@@ -1,0 +1,7 @@
+bin/
+obj/
+.vs/
+Release/
+Res/
+packages/
+input_forms/

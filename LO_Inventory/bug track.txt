@@ -1,0 +1,2 @@
+﻿- Viewer minimum size fucks up UI controls
+- Enter to cancel wrong cred warning when login also try to login again which pops up another warning

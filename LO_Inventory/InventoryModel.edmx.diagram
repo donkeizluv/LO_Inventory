@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9267b962858947259d6e2aa37d2f1870" Name="Diagram1" ZoomLevel="80">
+        <EntityTypeShape EntityType="InventoryDbModel.Cabinet" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryDbModel.Item" Width="1.5" PointX="3.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryDbModel.Order" Width="1.5" PointX="3.875" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryDbModel.Provider" Width="1.5" PointX="1.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryDbModel.Role" Width="1.5" PointX="1.125" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryDbModel.TransactionPermission" Width="1.5" PointX="5.625" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryDbModel.Transaction" Width="1.5" PointX="7" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryDbModel.User" Width="1.5" PointX="3.75" PointY="9.75" IsExpanded="true" />
+        <AssociationConnector Association="InventoryDbModel.FK_Orders_Cabinets" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryDbModel.FK_TransactionsProvider_Cabinet" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryDbModel.FK_TransactionsReceiverr_Cabinet" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryDbModel.FK_Orders_Items" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryDbModel.FK_TransactionsItem_Items" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryDbModel.FK_Orders_Providers" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryDbModel.FK_Users_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryDbModel.FK_TransactionPermission_Users" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="InventoryDbModel.CabinetType" Width="1.5" PointX="0.5" PointY="8.625" />
+        <AssociationConnector Association="InventoryDbModel.FK_Cabinets_CabinetType" />
+        <AssociationConnector Association="InventoryDbModel.FK_TransactionPermission_CabinetType" />
+        <AssociationConnector Association="InventoryDbModel.FK_Transactions_Users" />
+        <AssociationConnector Association="InventoryDbModel.FK_Orders_Users" />
+        <EntityTypeShape EntityType="InventoryDbModel.CabinetList" Width="1.5" PointX="8.375" PointY="6.75" />
+        <EntityTypeShape EntityType="InventoryDbModel.ItemList" Width="1.5" PointX="6.375" PointY="9.75" />
+        <EntityTypeShape EntityType="InventoryDbModel.TransactionList" Width="1.5" PointX="10.375" PointY="4.75" />
+        <EntityTypeShape EntityType="InventoryDbModel.CabinetTypeList" Width="1.5" PointX="10.375" PointY="8.75" />
+        <EntityTypeShape EntityType="InventoryDbModel.OrderList" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="InventoryDbModel.ProviderList" Width="1.5" PointX="10.375" PointY="11.75" />
+        <EntityTypeShape EntityType="InventoryDbModel.UserList" Width="1.5" PointX="12.375" PointY="7.75" />
+        <EntityTypeShape EntityType="InventoryDbModel.PermissionType" Width="1.5" PointX="12.375" PointY="10.875" />
+        <EntityTypeShape EntityType="InventoryDbModel.TransPermissionList" Width="1.5" PointX="13.375" PointY="0.75" />
+        <AssociationConnector Association="InventoryDbModel.FK_TransactionPermission_PermissionType" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
