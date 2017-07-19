@@ -140,26 +140,18 @@ namespace LO_Inventory.Forms
             return IsValidateCredentials(userName, pwd, DomainName);
         }
 
-        private void TextBoxPwd_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                ButtonLogin_Click(this, EventArgs.Empty);
-            }
-        }
-
-        private void TextBoxUsername_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                ButtonLogin_Click(this, EventArgs.Empty);
-            }
-        }
-
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if(DialogResult != DialogResult.OK)
                 DialogResult = DialogResult.Cancel;
+        }
+
+        private void textBoxPwd_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == 13)
+            {
+                ButtonLogin_Click(this, EventArgs.Empty);
+            }
         }
     }
 }

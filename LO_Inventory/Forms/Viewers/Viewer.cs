@@ -85,11 +85,6 @@ namespace LO_Inventory.Forms
                 //start insering
                 var affedted = Controller.Insert(content);
                 ActionLogger.AddToLog($"Insert {Text}", $"Success inserted: {affedted}");
-                //show log!
-                //foreach (var log in logs)
-                //{
-                //    ActionLogger.AddToLog(log);
-                //}
             }
             //catch all the parsing, db, entities exceptions here!
             catch (ArgumentException ex) //who throws this???
@@ -112,8 +107,10 @@ namespace LO_Inventory.Forms
                 {
                     mess += $", raw value: [{ex.RawValue}]";
                 }
-                var actionLog = new ActionLog($"Insert {Text}", mess);
+                var actionLog = new ActionLog($"Insert {Text}", mess, true);
                 ActionLogger.AddToLog(actionLog);
+                //refresh main grid
+                ButtonRefresh_Click(this, EventArgs.Empty);
             }
             catch (DbUpdateException ex) //db exception
             {

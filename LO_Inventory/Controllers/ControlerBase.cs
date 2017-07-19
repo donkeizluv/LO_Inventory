@@ -8,16 +8,18 @@ using System.Linq.Expressions;
 
 namespace LO_Inventory.Controllers
 {
-    public abstract class ControllerBase<T, DisplayE> : IController
+    //T: controller Type
+    //V: view entity
+    public abstract class ControllerBase<T, V> : IController
     {
         public DataGridView Grid { get; private set; }
 
         public IViewer Viewer { get; private set; }
         public List<string> HiddenColumns { get; set; } = new List<string>();
 
-        protected abstract IQueryable<DisplayE> MainQuery(InventoryDbEntities context);
+        protected abstract IQueryable<V> MainQuery(InventoryDbEntities context);
 
-        protected abstract IQueryable<DisplayE> FilteredQuery(InventoryDbEntities context, string like);
+        protected abstract IQueryable<V> FilteredQuery(InventoryDbEntities context, string like);
 
         protected abstract void Innit();
 
