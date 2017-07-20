@@ -71,7 +71,7 @@ namespace LO_Inventory.Controllers
                 Viewer.TotalPages = value;
             }
         }
-        public virtual int ItemPerPage { get; set; } = 75;
+        public int ItemPerPage { get; set; } = 75;
 
 
         public virtual DataTable GetMainGridDataTable(int page)
@@ -136,7 +136,7 @@ namespace LO_Inventory.Controllers
             }
         }
 
-        protected IQueryable<DisplayE> PagedResult<DisplayE>(IQueryable<DisplayE> query, int pageNum)
+        protected IQueryable<V> PagedResult(IQueryable<V> query, int pageNum)
         {
             if (pageNum < 1) throw new ArgumentException();
             int excludedRows = (pageNum - 1) * ItemPerPage;
