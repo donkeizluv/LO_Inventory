@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace LO_Inventory.Forms
@@ -44,10 +43,12 @@ namespace LO_Inventory.Forms
             textBoxPwd.Text = "Dant@760119";
 #endif
         }
+
         private void SetVer()
         {
             labelVer.Text = $"Ver {Program.GetVer}";
         }
+
         private void SetServer()
         {
             var server = string.Empty;
@@ -65,11 +66,11 @@ namespace LO_Inventory.Forms
 
             labelDataSourse.Text = $"Server: {server}";
         }
-           
+
         private void ButtonLogin_Click(object sender, EventArgs e)
         {
             DoLogin();
-            if(Authorized)
+            if (Authorized)
             {
                 Close();
             }
@@ -146,13 +147,13 @@ namespace LO_Inventory.Forms
 
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(DialogResult != DialogResult.OK)
+            if (DialogResult != DialogResult.OK)
                 DialogResult = DialogResult.Cancel;
         }
 
         private void textBoxPwd_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(e.KeyChar == 13)
+            if (e.KeyChar == 13)
             {
                 ButtonLogin_Click(this, EventArgs.Empty);
             }

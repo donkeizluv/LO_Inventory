@@ -2,9 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Windows.Forms;
 using System.Linq;
-using System.Linq.Expressions;
+using System.Windows.Forms;
 
 namespace LO_Inventory.Controllers
 {
@@ -33,6 +32,7 @@ namespace LO_Inventory.Controllers
 
         public int UserId { get; set; }
         private int _totalRows;
+
         public int TotalRows
         {
             get
@@ -45,7 +45,9 @@ namespace LO_Inventory.Controllers
                 Viewer.TotalRows = value;
             }
         }
+
         private int _currentPage;
+
         public int CurrentPage
         {
             get
@@ -58,7 +60,9 @@ namespace LO_Inventory.Controllers
                 Viewer.CurrentPage = value;
             }
         }
+
         private int _totalPages;
+
         public int TotalPages
         {
             get
@@ -71,8 +75,8 @@ namespace LO_Inventory.Controllers
                 Viewer.TotalPages = value;
             }
         }
-        public int ItemPerPage { get; set; } = 75;
 
+        public int ItemPerPage { get; set; } = 75;
 
         public virtual DataTable GetMainGridDataTable(int page)
         {

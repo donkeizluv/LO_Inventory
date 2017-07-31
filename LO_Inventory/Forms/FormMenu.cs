@@ -2,7 +2,7 @@
 using LO_Inventory.Parser;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Data.Entity.Core;
 using System.Windows.Forms;
 using static LO_Inventory.Forms.LoginForm;
 
@@ -63,7 +63,6 @@ namespace LO_Inventory.Forms
                 MessageBox.Show(this, "Cannot connect to db.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Close();
                 return;
-
             }
         }
 
@@ -115,10 +114,12 @@ namespace LO_Inventory.Forms
         {
             ShowForm<ItemViewer>("Items");
         }
+
         private void ButtonItemCat_Click(object sender, EventArgs e)
         {
             ShowForm<ItemCategoryViewer>("Item Category");
         }
+
         private void ButtonTran_Click(object sender, EventArgs e)
         {
             ShowForm<TransactionViewer>("Transactions");
@@ -152,24 +153,33 @@ namespace LO_Inventory.Forms
         private void ShowForm<T>(string name) where T : IViewer, new()
         {
             var newForm = new T();
-            newForm.Controller.UserId = UserId;
-            newForm.Controller.Username = Username;
-            newForm.Text = name;
-            newForm.ActionLogger = ActionLogger;
-            foreach (var form in _formList)
+            try
             {
-                if (form is T)
+                newForm = new T();
+                newForm.Controller.UserId = UserId;
+                newForm.Controller.Username = Username;
+                newForm.Text = name;
+                newForm.ActionLogger = ActionLogger;
+                foreach (var form in _formList)
                 {
-                    form.Show();
-                    form.Focus();
-                    newForm.Dispose();
-                    return;
+                    if (form is T)
+                    {
+                        form.Show();
+                        form.Focus();
+                        newForm.Dispose();
+                        return;
+                    }
                 }
+                newForm.RefeshMainGrid();
+                newForm.Show();
+                newForm.Focus();
+                _formList.Add(newForm);
             }
-            _formList.Add(newForm);
-            newForm.Show();
-            newForm.Focus();
-            newForm.RefeshMainGrid();
+            catch (EntityCommandExecutionException ex)
+            {
+                newForm.Dispose();
+                MessageBox.Show(this, "Database does not support this function", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ShowLogToolStripMenuItem_Click(object sender, EventArgs e)

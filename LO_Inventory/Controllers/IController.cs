@@ -1,8 +1,6 @@
 ﻿using LO_Inventory.Forms;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace LO_Inventory.Controllers
@@ -15,11 +13,15 @@ namespace LO_Inventory.Controllers
         List<string> HiddenColumns { get; set; }
 
         DataTable GetMainGridDataTable(int page);
+
         DataTable GetFilterdDataTable(string s);
+
         string[] MainGridToArray(string delimitor);
 
         void ShowDatatable(DataTable table);
+
         void RefreshPageNumber();
+
         //IReportViewer MyReportViewer { get; }
 
         IViewer Viewer { get; }

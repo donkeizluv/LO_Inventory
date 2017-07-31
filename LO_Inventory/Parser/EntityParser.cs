@@ -12,6 +12,7 @@ namespace LO_Inventory.Parser
         public int ErrorIndex { get; private set; } = -1;
         public string ValueName { get; private set; } = string.Empty;
         public string RawValue { get; private set; } = string.Empty;
+
         public EntityParsingException(string message) : base(message)
         {
         }

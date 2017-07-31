@@ -41,6 +41,7 @@ namespace LO_Inventory.Parser
             id = item.ItemId;
             return true;
         }
+
         public static bool GetCatId(string name, out int? id, InventoryDbEntities context)
         {
             id = null;
@@ -49,6 +50,7 @@ namespace LO_Inventory.Parser
             id = cat.CatId;
             return true;
         }
+
         public static bool GetCabinetId(string name, out int? id, InventoryDbEntities context)
         {
             id = null;

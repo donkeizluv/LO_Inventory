@@ -1,8 +1,8 @@
-﻿using System;
+﻿using LO_Inventory.Forms;
+using LO_Inventory.Parser;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using LO_Inventory.Forms;
-using LO_Inventory.Parser;
 
 namespace LO_Inventory.Controllers.ConcreteControllers
 {
@@ -31,8 +31,8 @@ namespace LO_Inventory.Controllers.ConcreteControllers
 
         protected override void InnitReportViewers()
         {
-            
         }
+
         protected override IQueryable<CatList> FilteredQuery(InventoryDbEntities context, string like)
         {
             var query = (from itemCat in context.CatLists
@@ -41,6 +41,7 @@ namespace LO_Inventory.Controllers.ConcreteControllers
                          select itemCat);
             return query;
         }
+
         protected override IQueryable<CatList> MainQuery(InventoryDbEntities context)
         {
             var query = (from row in context.CatLists

@@ -28,7 +28,7 @@ namespace LO_Inventory.Controllers.ConcreteControllers
                     context.Items.AddRange(e);
                     return context.SaveChanges();
                 }
-            }); 
+            });
         }
 
         protected override void Innit()
@@ -72,6 +72,7 @@ namespace LO_Inventory.Controllers.ConcreteControllers
                          ).OrderBy(row => row.ItemId);
             return query;
         }
+
         protected override IQueryable<ItemList> FilteredQuery(InventoryDbEntities context, string like)
         {
             var query = (from item in context.ItemLists

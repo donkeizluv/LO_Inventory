@@ -21,14 +21,19 @@ namespace LO_Inventory.Forms
         bool IsFiltered { get; }
         string Text { get; set; }
         int TotalRows { get; set; }
-        int CurrentPage { get; set; }    
+        int CurrentPage { get; set; }
         int TotalPages { get; set; }
-        void Next();
-        void Last();
-        void Prev();
-        void First();
-        void GotoPage(int page);
-        void Navigation(bool enable);
 
+        void Next();
+
+        void Last();
+
+        void Prev();
+
+        void First();
+
+        void GotoPage(int page);
+
+        void Navigation(bool enable);
     }
 }

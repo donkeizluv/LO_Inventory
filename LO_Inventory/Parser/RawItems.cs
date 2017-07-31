@@ -34,7 +34,7 @@ namespace LO_Inventory.Parser
                 {
                     if (!IdTranslater.GetCatId(cat, out id, context))
                     {
-                        throw new EntityParsingException("Name doesnt exist", "Item Category", i);
+                        throw new EntityParsingException("Name doesnt exist", "Item Category", cat, i);
                     }
                 }
                 catId = id ?? -1;

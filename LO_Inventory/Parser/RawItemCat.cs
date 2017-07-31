@@ -15,6 +15,7 @@ namespace LO_Inventory.Parser
         {
             CSV = csv;
         }
+
         public List<ItemCat> ToEntities()
         {
             var entities = new List<ItemCat>();
@@ -23,8 +24,7 @@ namespace LO_Inventory.Parser
                 if (CSV[i].Count() != ColumnCount) throw new EntityParsingException("Invalid column count", i);
                 string name = CSV[i][0];
                 if (name.Length > NameLength) throw new EntityParsingException("Invalid length", "ItemName", name, i);
-               
-                
+
                 var cat = new ItemCat()
                 {
                     CatName = name

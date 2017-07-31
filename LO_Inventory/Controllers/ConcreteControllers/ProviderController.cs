@@ -24,6 +24,7 @@ namespace LO_Inventory.Controllers.ConcreteControllers
 
         protected override Func<List<string[]>, List<Provider>> ParseFunc { get; set; }
         protected override Func<List<Provider>, int> InsertAction { get; set; }
+
         protected override IQueryable<ProviderList> FilteredQuery(InventoryDbEntities context, string like)
         {
             var query = (from row in context.ProviderLists
@@ -43,7 +44,6 @@ namespace LO_Inventory.Controllers.ConcreteControllers
 
         protected override void InnitReportViewers()
         {
-
         }
 
         protected override IQueryable<ProviderList> MainQuery(InventoryDbEntities context)

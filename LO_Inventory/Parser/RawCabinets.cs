@@ -40,7 +40,7 @@ namespace LO_Inventory.Parser
                 {
                     if (!IdTranslater.GetCabinetTypeId(typeName, out typeId, context))
                     {
-                        throw new EntityParsingException("Name doesnt exist", "CabinetType", i);
+                        throw new EntityParsingException("Name doesnt exist", "CabinetType", typeName, i);
                     }
                 }
                 var cabinet = new Cabinet()

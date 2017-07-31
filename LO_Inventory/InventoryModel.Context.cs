@@ -17,11 +17,12 @@ namespace LO_Inventory
     
     public partial class InventoryDbEntities : DbContext
     {
-        public InventoryDbEntities()
-            : base("name=InventoryDbEntities")
-        {
-        }
-    
+        //public InventoryDbEntities()
+        //    : base("name=InventoryDbEntities")
+        //{
+        //}
+        public InventoryDbEntities() : base(Properties.Resources.LocalDBConnectionString)
+        { }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

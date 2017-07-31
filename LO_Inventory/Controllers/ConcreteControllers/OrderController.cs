@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace LO_Inventory.Controllers.ConcreteControllers
 {
-    public class OrderController : ControllerBase<Order,OrderList>
+    public class OrderController : ControllerBase<Order, OrderList>
     {
         public OrderController(IViewer view) : base(view)
         {

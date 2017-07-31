@@ -29,6 +29,7 @@ namespace LO_Inventory.Forms
         public ActionLogger ActionLogger { get; set; }
         public IController Controller { get; set; }
         private int _totalRows;
+
         public int TotalRows
         {
             get
@@ -41,13 +42,14 @@ namespace LO_Inventory.Forms
                 labelRowCount.Text = _totalRows.ToString();
             }
         }
+
         private int _currentPage;
+
         public int CurrentPage
         {
             get
             {
                 return _currentPage;
-
             }
             set
             {
@@ -55,7 +57,9 @@ namespace LO_Inventory.Forms
                 textBoxCurrentPage.Text = _currentPage.ToString();
             }
         }
+
         private int _totalPages;
+
         public int TotalPages
         {
             get
@@ -96,22 +100,20 @@ namespace LO_Inventory.Forms
             catch (EntityParsingException ex) //parsing exception
             {
                 var mess = string.Empty;
-                if(ex.ErrorIndex != -1)
+                if (ex.ErrorIndex != -1)
                 {
                     mess = $"{ex.Message} row: [{ex.ErrorIndex + 1}]";
-
                 }
-                if(ex.ValueName != string.Empty)
+                if (ex.ValueName != string.Empty)
                 {
                     mess += $", value name: [{ex.ValueName}]";
                 }
-                if(ex.RawValue != string.Empty)
+                if (ex.RawValue != string.Empty)
                 {
                     mess += $", raw value: [{ex.RawValue}]";
                 }
                 var actionLog = new ActionLog($"Insert {Text}", mess, true);
                 ActionLogger.AddToLog(actionLog);
-   
             }
             catch (DbUpdateException ex) //db exception
             {
@@ -184,7 +186,6 @@ namespace LO_Inventory.Forms
         private void ButtonToCSV_Click(object sender, EventArgs e)
         {
             MessageBox.Show("chức năng đang được xây dựng");
-
         }
 
         private void ButtonInsert_Click(object sender, EventArgs e)
@@ -242,11 +243,11 @@ namespace LO_Inventory.Forms
         private void TextBoxCurrentPage_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 8) return; //backspace
-            if(e.KeyChar == 13) //enter
+            if (e.KeyChar == 13) //enter
             {
-                var page = int.Parse(textBoxCurrentPage.Text.Length > 1 ? 
+                var page = int.Parse(textBoxCurrentPage.Text.Length > 1 ?
                     textBoxCurrentPage.Text.TrimStart('0') : textBoxCurrentPage.Text);
-                if(page < 1 || page > TotalPages) //invalid page
+                if (page < 1 || page > TotalPages) //invalid page
                 {
                     textBoxCurrentPage.Text = CurrentPage.ToString();
                     e.Handled = true;
@@ -296,7 +297,6 @@ namespace LO_Inventory.Forms
             Controller.HideColumns();
             buttonClearFilter.Enabled = true;
             buttonApplyFilter.Enabled = false;
-
         }
 
         private void ButtonClearFilter_Click(object sender, EventArgs e)
