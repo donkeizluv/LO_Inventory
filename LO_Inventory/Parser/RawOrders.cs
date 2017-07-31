@@ -64,19 +64,19 @@ namespace LO_Inventory.Parser
                     //from cabinet id
                     if (!IdTranslater.GetCabinetId(toCabinet, out id, context))
                     {
-                        throw new EntityParsingException("Name doesnt exist", "ToCabinet", i);
+                        throw new EntityParsingException("Name doesnt exist", "ToCabinet", toCabinet, i);
                     }
                     toCabinetId = id ?? -1;
                     //to cabinet id
                     if (!IdTranslater.GetProviderId(provider, out id, context))
                     {
-                        throw new EntityParsingException("Name doesnt exist", "Provider", i);
+                        throw new EntityParsingException("Name doesnt exist", "Provider", provider, i);
                     }
                     providerId = id ?? -1;
                     //item code
                     if (!IdTranslater.GetItemId(itemCode, out id, context))
                     {
-                        throw new EntityParsingException("Name doesnt exist", "ItemCode", i);
+                        throw new EntityParsingException("Name doesnt exist", "ItemCode", itemCode, i);
                     }
                     itemId = id ?? -1;
                 }

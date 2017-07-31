@@ -12,24 +12,18 @@ namespace LO_Inventory
     using System;
     using System.Collections.Generic;
     
-    public partial class Item
+    public partial class ItemCat
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Item()
+        public ItemCat()
         {
-            this.Orders = new HashSet<Order>();
-            this.Transactions = new HashSet<Transaction>();
+            this.Items = new HashSet<Item>();
         }
     
-        public int ItemId { get; set; }
-        public string ItemCode { get; set; }
-        public string ItemName { get; set; }
         public int CatId { get; set; }
+        public string CatName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Transaction> Transactions { get; set; }
-        public virtual ItemCat ItemCat { get; set; }
+        public virtual ICollection<Item> Items { get; set; }
     }
 }

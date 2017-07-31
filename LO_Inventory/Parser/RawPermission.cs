@@ -33,13 +33,13 @@ namespace LO_Inventory.Parser
                     //to cabinet id
                     if (!IdTranslater.GetCabinetTypeId(cabinetType, out id, context))
                     {
-                        throw new EntityParsingException("Name doesnt exist", "CabinetType", i);
+                        throw new EntityParsingException("Name doesnt exist", "CabinetType", cabinetType, i);
                     }
                     cId = id ?? -1;
                     //username
                     if (!IdTranslater.GetUserId(userName, out id, context))
                     {
-                        throw new EntityParsingException("Name doesnt exist", "Username", i);
+                        throw new EntityParsingException("Name doesnt exist", "Username", userName, i);
                     }
                     userId = id ?? -1;
                 }

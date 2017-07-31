@@ -29,7 +29,7 @@ namespace LO_Inventory.Forms.Viewers.ConcreteViewers
         }
 
         //sales of item
-        private void buttonReport2_Click(object sender, EventArgs e)
+        private void ButtonReport2_Click(object sender, EventArgs e)
         {
             if (HelperMethods.ExecuteDbRequest(() => MyController.SalesOfItemReport.RefreshGrid()))
             {

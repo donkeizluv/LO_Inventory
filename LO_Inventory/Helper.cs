@@ -81,7 +81,7 @@ namespace LO_Inventory
         {
             var browser = new OpenFileDialog()
             {
-                Filter = "CSV File|*.csv"
+                Filter = "Text file|*.txt|CSV File|*.csv"
             };
             browser.ShowDialog(owner);
             path = browser.FileName;

@@ -17,16 +17,11 @@ namespace LO_Inventory
     
     public partial class InventoryDbEntities : DbContext
     {
-        //public InventoryDbEntities()
-        //    : base("name=InventoryDbEntities")
-        //{
-        //}
-        public InventoryDbEntities() : base(Properties.Resources.Helpdesk01ConnectionString)
-        { }
-
-        //public InventoryDbEntities() : base(Properties.Resources.LocalDBConnectionString)
-        //{ }
-
+        public InventoryDbEntities()
+            : base("name=InventoryDbEntities")
+        {
+        }
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -50,6 +45,8 @@ namespace LO_Inventory
         public virtual DbSet<UserList> UserLists { get; set; }
         public virtual DbSet<PermissionType> PermissionTypes { get; set; }
         public virtual DbSet<TransPermissionList> TransPermissionList { get; set; }
+        public virtual DbSet<ItemCat> ItemCats { get; set; }
+        public virtual DbSet<CatList> CatLists { get; set; }
     
         [DbFunction("InventoryDbEntities", "GetCurrentItemsCabinetHas")]
         public virtual IQueryable<GetCurrentItemsCabinetHas_Result> GetCurrentItemsCabinetHas(Nullable<int> cabinetId)

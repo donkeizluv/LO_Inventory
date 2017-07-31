@@ -39,6 +39,10 @@ namespace LO_Inventory.Forms
             SetVer();
             SetServer();
             var test = new InventoryDbEntities();
+#if DEBUG
+            textBoxUsername.Text = "luu.nhat-hong";
+            textBoxPwd.Text = "Dant@760119";
+#endif
         }
         private void SetVer()
         {

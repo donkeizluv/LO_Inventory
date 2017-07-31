@@ -12,7 +12,7 @@ namespace LO_Inventory.Forms
 {
     public partial class Viewer : Form, IViewer
     {
-        public const string EmptyButtonName = "empty";
+        public readonly string EmptyButtonName = string.Empty;
 
         public Viewer()
         {
@@ -85,6 +85,8 @@ namespace LO_Inventory.Forms
                 //start insering
                 var affedted = Controller.Insert(content);
                 ActionLogger.AddToLog($"Insert {Text}", $"Success inserted: {affedted}");
+                //refresh main grid
+                ButtonRefresh_Click(this, EventArgs.Empty);
             }
             //catch all the parsing, db, entities exceptions here!
             catch (ArgumentException ex) //who throws this???
@@ -109,8 +111,7 @@ namespace LO_Inventory.Forms
                 }
                 var actionLog = new ActionLog($"Insert {Text}", mess, true);
                 ActionLogger.AddToLog(actionLog);
-                //refresh main grid
-                ButtonRefresh_Click(this, EventArgs.Empty);
+   
             }
             catch (DbUpdateException ex) //db exception
             {

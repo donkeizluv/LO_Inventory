@@ -1,6 +1,6 @@
 ﻿namespace LO_Inventory.Forms.Viewers.ConcreteViewers
 {
-    partial class ItemViewer
+    partial class ItemCategoryViewer
     {
         /// <summary>
         /// Required designer variable.
@@ -28,30 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBoxReport.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // buttonReport1
-            // 
-            this.buttonReport1.Text = "Orders";
-            this.buttonReport1.Click += new System.EventHandler(this.ButtonReport1_Click);
-            // 
-            // buttonReport2
-            // 
-            this.buttonReport2.Text = "Sales";
-            this.buttonReport2.Click += new System.EventHandler(this.ButtonReport2_Click);
-            // 
-            // ItemViewer
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.ClientSize = new System.Drawing.Size(881, 681);
-            this.Name = "ItemViewer";
-            this.groupBoxReport.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            this.components = new System.ComponentModel.Container();
         }
 
         #endregion

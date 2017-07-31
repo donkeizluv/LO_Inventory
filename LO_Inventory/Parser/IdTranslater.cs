@@ -41,7 +41,14 @@ namespace LO_Inventory.Parser
             id = item.ItemId;
             return true;
         }
-
+        public static bool GetCatId(string name, out int? id, InventoryDbEntities context)
+        {
+            id = null;
+            var cat = context.ItemCats.FirstOrDefault(e => string.Compare(name, e.CatName, true) == 0);
+            if (cat == null) return false;
+            id = cat.CatId;
+            return true;
+        }
         public static bool GetCabinetId(string name, out int? id, InventoryDbEntities context)
         {
             id = null;
@@ -64,7 +71,7 @@ namespace LO_Inventory.Parser
         {
             id = null;
             var provider = context.Providers.FirstOrDefault(e => string.Compare(name, e.Name, true) == 0);
-            if (provider == null) throw new EntityParsingException("Username is not exist!");
+            if (provider == null) return false;
             id = provider.ProviderId;
             return true;
         }

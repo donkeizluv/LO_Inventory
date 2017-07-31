@@ -81,8 +81,12 @@
     <Compile Include="CabinetTypeList.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CatList.cs">
+      <DependentUpon>InventoryModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\ConcreteControllers\CabinetController.cs" />
     <Compile Include="Controllers\ConcreteControllers\CabinetTypeController.cs" />
+    <Compile Include="Controllers\ConcreteControllers\ItemCategoryController.cs" />
     <Compile Include="Controllers\ConcreteControllers\OrderController.cs" />
     <Compile Include="Controllers\ConcreteControllers\PermissionController.cs" />
     <Compile Include="Controllers\ConcreteControllers\ProviderController.cs" />
@@ -109,6 +113,12 @@
     </Compile>
     <Compile Include="Forms\Viewers\ConcreteViewers\CabinetViewer.Designer.cs">
       <DependentUpon>CabinetViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Viewers\ConcreteViewers\ItemCategoryViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Viewers\ConcreteViewers\ItemCategoryViewer.Designer.cs">
+      <DependentUpon>ItemCategoryViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Viewers\ConcreteViewers\ItemViewer.cs">
       <SubType>Form</SubType>
@@ -208,6 +218,9 @@
     <Compile Include="Item.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ItemCat.cs">
+      <DependentUpon>InventoryModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ItemList.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
@@ -227,6 +240,7 @@
     <Compile Include="Parser\IRaw.cs" />
     <Compile Include="Parser\RawCabinets.cs" />
     <Compile Include="Parser\RawCabinetType.cs" />
+    <Compile Include="Parser\RawItemCat.cs" />
     <Compile Include="Parser\RawItems.cs" />
     <Compile Include="Parser\RawOrders.cs" />
     <Compile Include="Parser\RawPermission.cs" />

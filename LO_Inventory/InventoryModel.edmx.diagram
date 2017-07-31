@@ -36,6 +36,9 @@
         <EntityTypeShape EntityType="InventoryDbModel.PermissionType" Width="1.5" PointX="12.375" PointY="10.875" />
         <EntityTypeShape EntityType="InventoryDbModel.TransPermissionList" Width="1.5" PointX="13.375" PointY="0.75" />
         <AssociationConnector Association="InventoryDbModel.FK_TransactionPermission_PermissionType" />
+        <EntityTypeShape EntityType="InventoryDbModel.ItemCat" Width="1.5" PointX="5.375" PointY="0.5" />
+        <AssociationConnector Association="InventoryDbModel.FK_Items_ItemCat" />
+        <EntityTypeShape EntityType="InventoryDbModel.CatList" Width="1.5" PointX="12.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

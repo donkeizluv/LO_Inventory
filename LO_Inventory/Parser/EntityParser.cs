@@ -56,6 +56,12 @@ namespace LO_Inventory.Parser
             return raw.ToEntities();
         }
 
+        public List<ItemCat> ParseToItemCats(List<string[]> content)
+        {
+            var raw = new RawItemCat(content);
+            return raw.ToEntities();
+        }
+
         public List<Item> ParseToItems(List<string[]> content)
         {
             var raw = new RawItems(content);

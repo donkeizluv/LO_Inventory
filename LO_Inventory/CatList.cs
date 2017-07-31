@@ -12,12 +12,9 @@ namespace LO_Inventory
     using System;
     using System.Collections.Generic;
     
-    public partial class ItemList
+    public partial class CatList
     {
-        public int ItemId { get; set; }
-        public string ItemCode { get; set; }
-        public string ItemName { get; set; }
-        public Nullable<int> InUse { get; set; }
-        public string CatName { get; set; }
+        public int CatId { get; set; }
+        public string Category_Name { get; set; }
     }
 }

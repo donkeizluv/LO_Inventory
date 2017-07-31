@@ -115,7 +115,10 @@ namespace LO_Inventory.Forms
         {
             ShowForm<ItemViewer>("Items");
         }
-
+        private void ButtonItemCat_Click(object sender, EventArgs e)
+        {
+            ShowForm<ItemCategoryViewer>("Item Category");
+        }
         private void ButtonTran_Click(object sender, EventArgs e)
         {
             ShowForm<TransactionViewer>("Transactions");

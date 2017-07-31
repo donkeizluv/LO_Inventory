@@ -23,6 +23,13 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="120" />
         </EntityType>
+        <EntityType Name="ItemCat">
+          <Key>
+            <PropertyRef Name="CatId" />
+          </Key>
+          <Property Name="CatId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CatName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Items">
           <Key>
             <PropertyRef Name="ItemId" />
@@ -30,6 +37,7 @@
           <Property Name="ItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ItemCode" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ItemName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CatId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -130,16 +138,28 @@ warning 6002: The table/view 'InventoryDb.dbo.CabinetTypeList' does not have a p
           <Property Name="CabinetTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'InventoryDb.dbo.CatList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CatList">
+          <Key>
+            <PropertyRef Name="Category Name" />
+            <PropertyRef Name="CatId" />
+          </Key>
+          <Property Name="Category Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CatId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'InventoryDb.dbo.ItemList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ItemList">
           <Key>
             <PropertyRef Name="ItemId" />
             <PropertyRef Name="ItemCode" />
             <PropertyRef Name="ItemName" />
+            <PropertyRef Name="CatName" />
           </Key>
           <Property Name="ItemId" Type="int" Nullable="false" />
           <Property Name="ItemCode" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ItemName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CatName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="InUse" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -225,7 +245,7 @@ warning 6002: The table/view 'InventoryDb.dbo.TransPermissionLists' does not hav
             <PropertyRef Name="CabinetTypeId" />
           </Key>
           <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="PermissionType" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="PermissionType" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Cabinet Type" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Note" Type="nvarchar" MaxLength="150" />
           <Property Name="PermissionId" Type="int" Nullable="false" />
@@ -254,6 +274,18 @@ warning 6002: The table/view 'InventoryDb.dbo.UserList' does not have a primary 
             </Principal>
             <Dependent Role="Cabinets">
               <PropertyRef Name="CabinetTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_ItemCat">
+          <End Role="ItemCat" Type="Self.ItemCat" Multiplicity="1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemCat">
+              <PropertyRef Name="CatId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="CatId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -524,6 +556,7 @@ warning 6002: The table/view 'InventoryDb.dbo.UserList' does not have a primary 
         <EntityContainer Name="InventoryDbModelStoreContainer">
           <EntitySet Name="Cabinets" EntityType="Self.Cabinets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CabinetType" EntityType="Self.CabinetType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemCat" EntityType="Self.ItemCat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PermissionType" EntityType="Self.PermissionType" Schema="dbo" store:Type="Tables" />
@@ -548,11 +581,18 @@ warning 6002: The table/view 'InventoryDb.dbo.UserList' does not have a primary 
     [CabinetTypeList].[CabinetTypeId] AS [CabinetTypeId]
     FROM [dbo].[CabinetTypeList] AS [CabinetTypeList]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="CatList" EntityType="Self.CatList" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CatList].[Category Name] AS [Category Name], 
+    [CatList].[CatId] AS [CatId]
+    FROM [dbo].[CatList] AS [CatList]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="ItemList" EntityType="Self.ItemList" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ItemList].[ItemId] AS [ItemId], 
     [ItemList].[ItemCode] AS [ItemCode], 
     [ItemList].[ItemName] AS [ItemName], 
+    [ItemList].[CatName] AS [CatName], 
     [ItemList].[InUse] AS [InUse]
     FROM [dbo].[ItemList] AS [ItemList]</DefiningQuery>
           </EntitySet>
@@ -620,6 +660,10 @@ warning 6002: The table/view 'InventoryDb.dbo.UserList' does not have a primary 
           <AssociationSet Name="FK_Cabinets_CabinetType" Association="Self.FK_Cabinets_CabinetType">
             <End Role="CabinetType" EntitySet="CabinetType" />
             <End Role="Cabinets" EntitySet="Cabinets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_ItemCat" Association="Self.FK_Items_ItemCat">
+            <End Role="ItemCat" EntitySet="ItemCat" />
+            <End Role="Items" EntitySet="Items" />
           </AssociationSet>
           <AssociationSet Name="FK_Orders_Cabinets" Association="Self.FK_Orders_Cabinets">
             <End Role="Cabinets" EntitySet="Cabinets" />
@@ -708,6 +752,8 @@ warning 6002: The table/view 'InventoryDb.dbo.UserList' does not have a primary 
           <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Items" FromRole="Items" ToRole="Orders" />
           <NavigationProperty Name="Transactions" Relationship="Self.FK_TransactionsItem_Items" FromRole="Items" ToRole="Transactions" />
+          <Property Name="CatId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ItemCat" Relationship="InventoryDbModel.FK_Items_ItemCat" FromRole="Item" ToRole="ItemCat" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -1009,6 +1055,12 @@ warning 6002: The table/view 'InventoryDb.dbo.UserList' does not have a primary 
             <End Role="PermissionType" EntitySet="PermissionTypes" />
             <End Role="TransactionPermission" EntitySet="TransactionPermissions" />
           </AssociationSet>
+          <EntitySet Name="ItemCats" EntityType="InventoryDbModel.ItemCat" />
+          <AssociationSet Name="FK_Items_ItemCat" Association="InventoryDbModel.FK_Items_ItemCat">
+            <End Role="ItemCat" EntitySet="ItemCats" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <EntitySet Name="CatLists" EntityType="InventoryDbModel.CatList" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1105,11 +1157,13 @@ warning 6002: The table/view 'InventoryDb.dbo.UserList' does not have a primary 
             <PropertyRef Name="ItemId" />
             <PropertyRef Name="ItemCode" />
             <PropertyRef Name="ItemName" />
+            <PropertyRef Name="CatName" />
           </Key>
           <Property Name="ItemId" Type="Int32" Nullable="false" />
           <Property Name="ItemCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ItemName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="InUse" Type="Int32" />
+          <Property Name="CatName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <ComplexType Name="GetOrdersOfItem_Result">
           <Property Type="Int32" Name="ItemId" Nullable="false" />
@@ -1241,7 +1295,7 @@ warning 6002: The table/view 'InventoryDb.dbo.UserList' does not have a primary 
             <PropertyRef Name="CabinetTypeId" />
           </Key>
           <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PermissionType" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="PermissionType" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Cabinet_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Note" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="PermissionId" Type="Int32" Nullable="false" />
@@ -1260,6 +1314,34 @@ warning 6002: The table/view 'InventoryDb.dbo.UserList' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ItemCat">
+          <Key>
+            <PropertyRef Name="CatId" />
+          </Key>
+          <Property Name="CatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CatName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Items" Relationship="InventoryDbModel.FK_Items_ItemCat" FromRole="ItemCat" ToRole="Item" />
+        </EntityType>
+        <Association Name="FK_Items_ItemCat">
+          <End Type="InventoryDbModel.ItemCat" Role="ItemCat" Multiplicity="1" />
+          <End Type="InventoryDbModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemCat">
+              <PropertyRef Name="CatId" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="CatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CatList">
+          <Key>
+            <PropertyRef Name="CatId" />
+            <PropertyRef Name="Category_Name" />
+          </Key>
+          <Property Name="CatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1280,6 +1362,7 @@ warning 6002: The table/view 'InventoryDb.dbo.UserList' does not have a primary 
           <EntitySetMapping Name="Items">
             <EntityTypeMapping TypeName="InventoryDbModel.Item">
               <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="CatId" ColumnName="CatId" />
                 <ScalarProperty Name="ItemId" ColumnName="ItemId" />
                 <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
                 <ScalarProperty Name="ItemName" ColumnName="ItemName" />
@@ -1414,6 +1497,7 @@ warning 6002: The table/view 'InventoryDb.dbo.UserList' does not have a primary 
           <EntitySetMapping Name="ItemLists">
             <EntityTypeMapping TypeName="InventoryDbModel.ItemList">
               <MappingFragment StoreEntitySet="ItemList">
+                <ScalarProperty Name="CatName" ColumnName="CatName" />
                 <ScalarProperty Name="InUse" ColumnName="InUse" />
                 <ScalarProperty Name="ItemName" ColumnName="ItemName" />
                 <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
@@ -1545,6 +1629,22 @@ warning 6002: The table/view 'InventoryDb.dbo.UserList' does not have a primary 
                 <ScalarProperty Name="Cabinet_Type" ColumnName="Cabinet Type" />
                 <ScalarProperty Name="PermissionType" ColumnName="PermissionType" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemCats">
+            <EntityTypeMapping TypeName="InventoryDbModel.ItemCat">
+              <MappingFragment StoreEntitySet="ItemCat">
+                <ScalarProperty Name="CatName" ColumnName="CatName" />
+                <ScalarProperty Name="CatId" ColumnName="CatId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CatLists">
+            <EntityTypeMapping TypeName="InventoryDbModel.CatList">
+              <MappingFragment StoreEntitySet="CatList">
+                <ScalarProperty Name="Category_Name" ColumnName="Category Name" />
+                <ScalarProperty Name="CatId" ColumnName="CatId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
